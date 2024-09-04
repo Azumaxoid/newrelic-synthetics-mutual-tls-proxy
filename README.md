@@ -15,8 +15,6 @@ docker run --name proxy \
 	--network newrelic-synthetics \
 	-p 3128:3128 \
 	-e DOMAIN=.sockshop.nrkk.technology \
-        -v ./fullchain.pem:/etc/squid/ssl_cert/server_cert.pem \
-	-v ./privkey.pem:/etc/squid/ssl_cert/server_private_key.pem \
 	-v ./client.pem:/etc/squid/ssl_cert/client.pem \
 	-v ./client_private_key.pem:/etc/squid/ssl_cert/client_private_key.pem \
 	squid_client_cert_proxy
@@ -27,12 +25,6 @@ docker run --name proxy \
   * 準備したポートを公開します。squidのデフォルト値を利用しています。
 * -e DOMAIN=.sockshop.nrkk.technology
   * クライアント証明書を使ってアクセスするドメイン。例では*.sockshop.nrkk.technologyを全て許容してみている。
-* -v ./fullchain.pem:/etc/squid/ssl_cert/server_cert.pem
-  * ./fullchain.pem 接続したいドメインをCNとしたSSL 証明書
-  * /etc/squid/ssl_cert/server_cert.pem Squidが利用する証明書のパス
-* -v ./privkey.pem:/etc/squid/ssl_cert/server_private_key.pem
-  * ./privkey.pem 接続したいドメインのSSL証明書と対となるprivate キー
-  * /etc/squid/ssl_cert/server_private_key.pem Squidが利用するSSL証明書のPrivate キーのパス
 * -v ./client.pem:/etc/squid/ssl_cert/client.pem
   * ./client.pem クライアント証明書
   * /etc/squid/ssl_cert/client.pem Squidが利用するクライアント証明書のパス
